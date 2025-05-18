@@ -1,38 +1,53 @@
+html, body {
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100vw !important;
+    box-sizing: border-box !important;
+}
+
 .inicio-secciones {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 40px;
-    margin-top: 40px;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0 !important;
+    margin: 0 !important;
+    width: 100vw !important;
+    padding: 0 !important;
 }
+
 .seccion {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    background: #222;
-    border-radius: 20px;
-    padding: 20px 0;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    margin-bottom: 20px;
+    display: flex !important;
+    align-items: center !important;
+    width: 100vw !important;
+    background: #222 !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+    margin: 0 0 20px 0 !important;
 }
-.fila { flex-direction: row; }
-.fila-reversa { flex-direction: row-reverse; }
+
+.fila { flex-direction: row !important; }
+.fila-reversa { flex-direction: row-reverse !important; }
+
 .img-lateral {
-    width: 200px;
-    height: 200px;
-    object-fit: cover;
-    border-radius: 20px 0 0 20px;
-    margin: 0;
-    display: block;
+    width: 300px !important;
+    height: 300px !important;
+    object-fit: cover !important;
+    border-radius: 0 !important;
+    margin: 0 !important;
+    display: block !important;
+    flex-shrink: 0 !important;
 }
-.fila-reversa .img-lateral {
-    border-radius: 0 20px 20px 0;
-}
+
 .descripcion {
-    flex: 1;
-    color: #fff;
-    padding: 0 30px;
+    flex: 1 !important;
+    color: #fff !important;
+    padding: 0 20px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    height: 300px !important;
 }
+
 .descripcion h2 {
-    margin-top: 0;
+    margin-top: 0 !important;
+    margin-bottom: 10px !important;
 }
