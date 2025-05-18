@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/main.css' %}">
+{% block title %}Balón Capitalino{% endblock %}
+{% block content %}
+    <div class="inicio-secciones">
+        <div class="seccion fila">
+            <img src="{% static 'main/imagenes/patos.png' %}" alt="Imagen 1" class="img-lateral">
+            <div class="descripcion">
+                <h2>Título 1</h2>
+                <p>Descripción de la primera sección. Aquí puedes poner información relevante sobre tu proyecto o lo que desees mostrar.</p>
+            </div>
+        </div>
+        <div class="seccion fila-reversa">
+            <img src="{% static 'main/imagenes/robin.jpg' %}" alt="Imagen 2" class="img-lateral">
+            <div class="descripcion">
+                <h2>Título 2</h2>
+                <p>Descripción de la segunda sección. Puedes alternar la posición de la imagen y el texto para un diseño más dinámico.</p>
+            </div>
+        </div>
+        <div class="seccion fila">
+            <img src="{% static 'main/imagenes/stanford.jpg' %}" alt="Imagen 3" class="img-lateral">
+            <div class="descripcion">
+                <h2>Título 3</h2>
+                <p>Descripción de la tercera sección. Puedes seguir agregando más secciones si lo necesitas.</p>
+            </div>
+        </div>
+    </div>
+{% endblock %}
