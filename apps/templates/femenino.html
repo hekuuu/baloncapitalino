@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/main.css' %}">
+{% block title %}Femenino | Balón Capitalino{% endblock %}
+{% block content %}
+    <!-- Banner tipo slider/carrusel Bootstrap para Femenino -->
+    <div id="bannerFemenino" class="carousel slide mb-4 banner-sombra" data-bs-ride="carousel" style="width:100vw; max-height:300px; overflow:hidden;">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <div class="banner-img-wrapper">
+            <img src="{% static 'main/imagenes/torneo3.jpeg' %}" class="d-block w-100 banner-img" alt="Banner Femenino 1">
+          </div>
+        </div>
+        <div class="carousel-item">
+          <div class="banner-img-wrapper">
+            <img src="{% static 'main/imagenes/torneo3.jpeg' %}" class="d-block w-100 banner-img" alt="Banner Femenino 2">
+          </div>
+        </div>
+        <div class="carousel-item">
+          <div class="banner-img-wrapper">
+            <img src="{% static 'main/imagenes/torneo3.jpeg' %}" class="d-block w-100 banner-img" alt="Banner Femenino 3">
+          </div>
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#bannerFemenino" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Anterior</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#bannerFemenino" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Siguiente</span>
+      </button>
+    </div>
+    <!-- Fin del banner slider -->
+
+    <h1 class="titulo-torneos">Femenino</h1>
+    <div class="container">
+      <div class="row">
+        {% for equipo in equipos %}
+          <div class="col-md-4 mb-4">
+            <div class="card h-100">
+              <img src="{{ equipo.imagen.url }}" class="card-img-top" alt="{{ equipo.nombre }}">
+              <div class="card-body">
+                <h5 class="card-title">{{ equipo.titulo }}</h5>
+                <p class="card-text">{{ equipo.descripcion }}</p>
+                <a href="#" class="btn btn-primary">Ver más</a>
+              </div>
+            </div>
+          </div>
+        {% empty %}
+          <p class="text-center">No hay equipos registrados.</p>
+        {% endfor %}
+      </div>
+    </div>
+{% endblock %}

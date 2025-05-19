@@ -18,25 +18,46 @@ html, body {
     display: flex !important;
     align-items: center !important;
     width: 100vw !important;
-    background: #222 !important;
+    background: rgba(121, 126, 96, 0.589) !important;
     border-radius: 0 !important;
     padding: 0 !important;
     margin: 0 0 20px 0 !important;
+    overflow: visible !important; /* Permite que la imagen sobresalga */
+    height: 300px !important; /* Altura del div de fondo */
 }
 
-.fila { flex-direction: row !important; }
-.fila-reversa { flex-direction: row-reverse !important; }
-
 .img-lateral {
-    width: 300px !important;
+    width: 40vw !important;         /* Cambia a un ancho relativo */
+    max-width: 500px !important;    /* Máximo ancho en pantallas grandes */
+    min-width: 200px !important;    /* Mínimo ancho en pantallas pequeñas */
     height: 300px !important;
     object-fit: cover !important;
-    border-radius: 0 !important;
+    border-radius: 20px !important;
     margin: 0 !important;
     display: block !important;
     flex-shrink: 0 !important;
+    position: relative !important;
+    z-index: 2 !important;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.3);
 }
 
+/* Opcional: mejora para pantallas pequeñas */
+@media (max-width: 700px) {
+    .img-lateral {
+        width: 90vw !important;
+        height: 180px !important;
+        max-width: 100% !important;
+    }
+    .seccion {
+        flex-direction: column !important;
+        height: auto !important;
+        align-items: stretch !important;
+    }
+    .descripcion {
+        height: auto !important;
+        padding: 10px !important;
+    }
+}
 .descripcion {
     flex: 1 !important;
     color: #fff !important;
@@ -44,10 +65,60 @@ html, body {
     display: flex !important;
     flex-direction: column !important;
     justify-content: center !important;
-    height: 300px !important;
+    height: 100% !important;
+    z-index: 3 !important;
 }
 
 .descripcion h2 {
     margin-top: 0 !important;
     margin-bottom: 10px !important;
+}
+
+.banner-sombra {
+    box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+    border-radius: 10px;
+}
+
+.banner-img-wrapper {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    overflow: hidden;
+}
+.banner-img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    display: block;
+    filter: brightness(0.5); /* Esto oscurece la imagen */
+}
+
+.titulo-torneos {
+    text-align: center;
+    font-size: 3rem;
+    font-family: 'Segoe UI', 'Arial', sans-serif;
+    color: hsl(0, 0%, 100%);
+    margin: 30px 0 10px 0;
+    letter-spacing: 2px;
+    text-shadow:
+        -2px -2px 0 #000,
+         2px -2px 0 #000,
+        -2px  2px 0 #000,
+         2px  2px 0 #000,
+         0px  2px 0 #000,
+         2px  0px 0 #000,
+         0px -2px 0 #000,
+        -2px  0px 0 #000;
+}
+
+.footer-balon {
+    width: 100vw;
+    background: #222;
+    color: #fff;
+    text-align: center;
+    padding: 20px 0 10px 0;
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+    margin-top: 40px;
+    box-shadow: 0 -4px 16px rgba(0,0,0,0.15);
 }
