@@ -97,18 +97,12 @@ html, body {
     text-align: center;
     font-size: 3rem;
     font-family: 'Segoe UI', 'Arial', sans-serif;
-    color: hsl(0, 0%, 100%);
+    color: hsl(51, 79%, 48%);
     margin: 30px 0 10px 0;
     letter-spacing: 2px;
-    text-shadow:
-        -2px -2px 0 #000,
-         2px -2px 0 #000,
-        -2px  2px 0 #000,
-         2px  2px 0 #000,
-         0px  2px 0 #000,
-         2px  0px 0 #000,
-         0px -2px 0 #000,
-        -2px  0px 0 #000;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    -webkit-text-stroke: 1px #6e5a00; /* Black border */
+      
 }
 
 .footer-balon {
@@ -121,4 +115,26 @@ html, body {
     letter-spacing: 1px;
     margin-top: 40px;
     box-shadow: 0 -4px 16px rgba(0,0,0,0.15);
+}
+
+.btn-ver-mas {
+    background-color: #cead18 !important;
+    color: #fff !important;
+    border: none !important;
+    padding: 10px 20px!important;
+    font-size: 1rem!important;
+    cursor: pointer!important;
+}
+.btn-ver-mas:hover {
+    transition: 0.5s;
+    background-color: #ffe81d !important;
+    color: #0f0f0f !important;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.3) !important;
+}
+.card {
+    transition: transform 0.3s cubic-bezier(0.4, 0.2, 0.2, 1), box-shadow 0.3s;
+}
+.card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.25);
 }

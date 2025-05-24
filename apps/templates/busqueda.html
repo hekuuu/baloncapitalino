@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block title %}Búsqueda de Jugadores{% endblock %}
+{% block content %}
+<h2>Búsqueda de Jugadores</h2>
+<form method="get">
+    <input type="text" name="equipo" placeholder="Equipo" value="{{ request.GET.equipo }}">
+    <input type="date" name="torneo" value="{{ request.GET.torneo }}">
+    <button type="submit">Buscar</button>
+</form>
+{% if jugadores is not None %}
+    <h3>Resultados:</h3>
+    {% if jugadores %}
+        <div class="row">
+        {% for jugador in jugadores %}
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 shadow-sm">
+                    <img src="{{ jugador.equipo_fecha.imagen.url }}" class="card-img-top" alt="Foto de {{ jugador.nombre }}" style="object-fit:contain; height:200px; width:100%; background:#f8f9fa;">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ jugador.nombre }} <small class="text-muted">({{ jugador.posicion }})</small></h5>
+                        <p class="card-text">
+                            <strong>Equipo:</strong> {{ jugador.equipo_fecha.equipo }}<br>
+                            <strong>Torneo:</strong> {{ jugador.equipo_fecha.torneo }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+    {% else %}
+        <p>No se encontraron jugadores.</p>
+    {% endif %}
+{% endif %}
+{% endblock %}
+<script>
+document.querySelector('form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const equipo = document.querySelector('input[name="equipo"]').value;
+    const torneo = document.querySelector('input[name="torneo"]').value;
+    const resultadosDiv = document.querySelector('.row');
+    resultadosDiv.innerHTML = '';
+    let url = `/api/jugadores/?equipo=${encodeURIComponent(equipo)}&torneo=${encodeURIComponent(torneo)}`;
+    const response = await fetch(url);
+    const data = await response.json();
+    if (data.length === 0) {
+        resultadosDiv.innerHTML = '<p>No se encontraron jugadores.</p>';
+    } else {
+        data.forEach(jugador => {
+            resultadosDiv.innerHTML += `
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 shadow-sm">
+                    <img src="${jugador.equipo_fecha.imagen}" class="card-img-top" alt="Foto de ${jugador.nombre}" style="object-fit:contain; height:200px; width:100%; background:#f8f9fa;">
+                    <div class="card-body">
+                        <h5 class="card-title">${jugador.nombre} <small class="text-muted">(${jugador.posicion})</small></h5>
+                        <p class="card-text">
+                            <strong>Equipo:</strong> ${jugador.equipo_fecha.equipo}<br>
+                            <strong>Torneo:</strong> ${jugador.equipo_fecha.torneo}
+                        </p>
+                    </div>
+                </div>
+            </div>`;
+        });
+    }
+});
+</script>
