@@ -138,3 +138,17 @@ html, body {
     transform: scale(1.03);
     box-shadow: 0 8px 32px rgba(0,0,0,0.25);
 }
+.contacto-atractivo {
+  background: linear-gradient(135deg, #e0e7ff 0%, #f8fafc 100%);
+  border: 2px solid #0d6efd22;
+}
+.contacto-icono {
+  font-size: 2.5rem;
+  color: #0d6efd;
+  transition: color 0.2s, transform 0.2s;
+  margin: 0 10px;
+}
+.contacto-icono:hover {
+  color: #6610f2;
+  transform: scale(1.2);
+}
