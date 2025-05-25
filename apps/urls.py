@@ -12,15 +12,15 @@ from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
 )
-
+from .views import scrape_jugadores
 schema_view = get_schema_view(
-   openapi.Info(
-      title="API Balón Capitalino",
-      default_version='v1',
-      description="Documentación de la API de jugadores",
-   ),
-   public=True,
-   permission_classes=(permissions.AllowAny,),
+    openapi.Info(
+        title="Your API Title",
+        default_version='v1',
+        description="API documentation",
+    ),
+    public=True,
+    permission_classes=(permissions.AllowAny,),
 )
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -37,3 +37,6 @@ urlpatterns = [
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += [
+        path('scrape_jugadores/', scrape_jugadores, name='scrape_jugadores'),
+    ]

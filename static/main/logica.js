@@ -1,5 +1,5 @@
-//document.getElementById('search-form').addEventListener('submit', function(e) {
- // e.preventDefault();
+document.getElementById('search-form').addEventListener('submit', function(e) {
+ e.preventDefault();
   const equipo = document.getElementById('equipo').value;
   const torneo = document.getElementById('torneo').value;
   let url = `/api/jugadores/?`;
