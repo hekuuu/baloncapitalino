@@ -61,9 +61,3 @@ def scrape_jugadores(request):
             noticia_obj, created = Noticia.objects.get_or_create(titulo=titulo_text)
             noticias.append({'titulo': titulo_text, 'created': created})
     return JsonResponse({'noticias': noticias})
-    jugadores = []
-    # Ajusta el selector según la estructura de la web
-    for jugador in soup.select('.jugador-lista .jugador-nombre'):
-        nombre = jugador.get_text(strip=True)
-        jugadores.append({'nombre': nombre})
-    return JsonResponse({'jugadores': jugadores})

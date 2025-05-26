@@ -1,18 +1,12 @@
 {% extends "base.html" %}
 {% block title %}Búsqueda de Jugadores{% endblock %}
 {% block content %}
-<div id="busqueda-section">
-  <h2>Búsqueda de Jugadores</h2>
-  <form id="busqueda-form" method="get">
-      <input type="text" name="equipo" placeholder="Equipo" value="{{ request.GET.equipo }}">
-      <input type="date" name="torneo" value="{{ request.GET.torneo }}">
-      <button type="submit">Buscar</button>
-  </form>
-  <div class="row"></div>
-</div>
-<div id="login-section">
-  <!-- Aquí tu formulario de login -->
-</div>
+<form id="busqueda-form" method="get">
+  <input type="text" name="equipo" placeholder="Equipo" value="{{ request.GET.equipo }}">
+  <input type="date" name="torneo" value="{{ request.GET.torneo }}">
+  <button type="submit">Buscar</button>
+</form>
+<div id="jugadores-result"></div>
 {% endblock %}
 <script>
 // Elimina o comenta este bloque para que la sección siempre se muestre
@@ -36,29 +30,25 @@ document.querySelector('form').addEventListener('submit', async function(e) {
     e.preventDefault();
     const equipo = document.querySelector('input[name="equipo"]').value;
     const torneo = document.querySelector('input[name="torneo"]').value;
-    const resultadosDiv = document.querySelector('.row');
+    const resultadosDiv = document.getElementById('jugadores-result');
     resultadosDiv.innerHTML = '';
     let url = `/api/jugadores/?equipo=${encodeURIComponent(equipo)}&torneo=${encodeURIComponent(torneo)}`;
     const response = await fetch(url);
     const data = await response.json();
-    if (data.length === 0) {
+    if (!data || data.length === 0 || (data.results && data.results.length === 0)) {
         resultadosDiv.innerHTML = '<p>No se encontraron jugadores.</p>';
     } else {
-        data.forEach(jugador => {
+        const jugadores = data.results || data;
+        jugadores.forEach(jugador => {
             resultadosDiv.innerHTML += `
-            <div class="col-md-4 mb-4">
-                <div class="card h-100 shadow-sm">
-                    <img src="${jugador.equipo_fecha.imagen}" class="card-img-top" alt="Foto de ${jugador.nombre}" style="object-fit:contain; height:200px; width:100%; background:#f8f9fa;">
-                    <div class="card-body">
-                        <h5 class="card-title">${jugador.nombre} <small class="text-muted">(${jugador.posicion})</small></h5>
-                        <p class="card-text">
-                            <strong>Equipo:</strong> ${jugador.equipo_fecha.equipo}<br>
-                            <strong>Torneo:</strong> ${jugador.equipo_fecha.torneo}
-                        </p>
-                    </div>
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">${jugador.nombre} <small>(${jugador.posicion})</small></h5>
+                    <p class="card-text"><strong>Equipo:</strong> ${jugador.equipo_fecha?.equipo || ''}<br><strong>Torneo:</strong> ${jugador.equipo_fecha?.torneo || ''}</p>
                 </div>
             </div>`;
         });
     }
 });
+<div id="jugadores-result"></div>
 </script>

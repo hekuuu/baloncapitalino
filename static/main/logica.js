@@ -1,5 +1,6 @@
+// --- BÚSQUEDA DE JUGADORES ---
 document.getElementById('search-form').addEventListener('submit', function(e) {
- e.preventDefault();
+  e.preventDefault();
   const equipo = document.getElementById('equipo').value;
   const torneo = document.getElementById('torneo').value;
   let url = `/api/jugadores/?`;
@@ -9,17 +10,18 @@ document.getElementById('search-form').addEventListener('submit', function(e) {
     .then(response => response.json())
     .then(data => {
       const resultDiv = document.getElementById('jugadores-result');
-      if (data.length === 0) {
+      const jugadores = data.results || data;
+      if (!jugadores || jugadores.length === 0) {
         resultDiv.innerHTML = '<p>No se encontraron jugadores.</p>';
       } else {
-        resultDiv.innerHTML = '<ul>' + data.map(j => `<li>${j.nombre} (${j.posicion || ''})</li>`).join('') + '</ul>';
+        resultDiv.innerHTML = '<ul>' + jugadores.map(j => `<li>${j.nombre} (${j.posicion || ''})</li>`).join('') + '</ul>';
       }
     });
 });
+
 // --- LOGIN ---
 async function login(username, password) {
   try {
-    // Ejemplo de fetch con ruta relativa
     const response = await fetch('/api/token/', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -45,7 +47,6 @@ async function getJugadores() {
   let response = await fetch('http://127.0.0.1:8000/api/jugadores/', {
     headers: { 'Authorization': 'Bearer ' + token }
   });
-  // Si el token expiró, intenta refrescarlo automáticamente
   if (response.status === 401) {
     const refreshed = await refreshToken();
     if (refreshed) {
@@ -105,4 +106,3 @@ document.addEventListener('DOMContentLoaded', function() {
 document.getElementById('btn-jugadores').addEventListener('click', getJugadores);
 // Si quieres un botón de cerrar sesión:
 // document.getElementById('btn-logout').addEventListener('click', logout);
- 
