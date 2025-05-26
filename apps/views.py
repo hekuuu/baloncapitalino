@@ -18,6 +18,8 @@ def kids_view(request):
     equipos = MiModelo.objects.filter(categoria='kids')
     return render(request, 'kids.html', {'equipos': equipos})
 
+def home(request):
+    return render(request, 'baloncapitalino.html')
 def unica_view(request):
     equipos = MiModelo.objects.filter(categoria='unica')
     return render(request, 'unica.html', {'equipos': equipos})

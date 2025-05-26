@@ -8,6 +8,7 @@ from .views import busqueda_jugadores
 from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
+from . import views
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
@@ -28,7 +29,8 @@ urlpatterns = [
     path('femenino/', femenino_view, name='femenino'),
     path('unica/', unica_view, name='unica'),
     path('kids/', kids_view, name='kids'),
-    path('api/jugadores/', JugadorListAPIView.as_view(), name='jugador-list'),
+    path('', views.home, name='home'),
+    
     path('busqueda/', busqueda_jugadores, name='busqueda'),
     re_path(r'^swagger/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
