@@ -7,7 +7,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 SECRET_KEY = 'django-insecure-1234567890abcdefghijklmnopqrstuvwxyz'
 DEBUG = True
-ALLOWED_HOSTS = ['*']  # Permite todos los hosts en desarrollo (cambiar en producción)
+ALLOWED_HOSTS = [".railway.app", "localhost", "127.0.0.1"]  # Permite todos los hosts en desarrollo (cambiar en producción)
 
 # Application definition
 INSTALLED_APPS = [
@@ -67,11 +67,14 @@ DATABASES = {
 }
 
 # Static files (CSS, JavaScript, Images)
-STATIC_URL = '/static/'
-STATIC_ROOT = BASE_DIR / 'staticfiles'
-STATICFILES_DIRS = [
-    BASE_DIR / 'static',
+CSRF_TRUSTED_ORIGINS = [
+    'https://baloncapitalino-production.up.railway.app'
 ]
+STATIC_URL = 'static/'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Media files
 MEDIA_URL = '/media/'

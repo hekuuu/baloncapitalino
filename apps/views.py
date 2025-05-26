@@ -36,17 +36,20 @@ def busqueda_jugadores(request):
             jugadores = jugadores.filter(equipo_fecha__torneo=torneo)
     return render(request, 'busqueda.html', {'jugadores': jugadores})
 
+from rest_framework import generics
+from .models import Jugador
+from .serializers import JugadorSerializer
+
 class JugadorListAPIView(generics.ListAPIView):
     serializer_class = JugadorSerializer
-
     def get_queryset(self):
+        equipo = self.request.GET.get('equipo', '')
+        torneo = self.request.GET.get('torneo', '')
         queryset = Jugador.objects.all()
-        equipo = self.request.query_params.get('equipo')
-        torneo = self.request.query_params.get('torneo')
         if equipo:
-            queryset = queryset.filter(equipo_fecha__equipo__icontains=equipo)
+            queryset = queryset.filter(equipo__nombre__icontains=equipo)
         if torneo:
-            queryset = queryset.filter(equipo_fecha__torneo=torneo)
+            queryset = queryset.filter(torneo__nombre__icontains=torneo)
         return queryset
 
 def scrape_jugadores(request):
